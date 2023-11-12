@@ -9,7 +9,7 @@ May not support complex nested objects|Maps. <br>
 
 Encoding slice is slower than JSON (~ x2). <br>
 Decoding slice is faster than JSON (~ x2.5 - 5) and CBOR (~ x2 - 3) <br>
-Decoding map is slightly faster than JSON (~ x3) CBOR (~ 20%). <br>
+Decoding map is faster than JSON (~ x3) and CBOR (~ 20%). <br>
 Strict type assertion can be done from js side. <br>
 
 
