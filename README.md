@@ -1,4 +1,4 @@
-# ZBUF v2
+# ZBUF
 Simple binary data transfer protocol to send strictly typed data. <br>
 Built mainly for transferring ordered typed data from JS to other languages. <br>
 V2 will focus on JS and Go. <br>
