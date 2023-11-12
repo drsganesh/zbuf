@@ -1,16 +1,20 @@
 # ZBUF
 Simple binary data transfer protocol to send strictly typed data. <br>
 Built mainly for transferring ordered typed data from JS to other languages. <br>
-V2 will focus on JS and Go. <br>
+Initial versions will focus on JS and Go. <br>
 Uses Little Endian. <br>
 Mostly zero copy. <br>
+Supports streaming<br>
 Rows are supported as well as schema maps. <br>
 May not support complex nested objects|Maps. <br>
 
 Encoding slice is slower than JSON (~ x2). <br>
 Decoding slice is faster than JSON (~ x2.5 - 5) and CBOR (~ x2 - 3) <br>
+Encoding map is takes similar time as JSON and is slower than CBOR (~ x1.4x -1.5x ) <br>
 Decoding map is faster than JSON (~ x3) and CBOR (~ 20%). <br>
 Strict type assertion can be done from js side. <br>
+
+Considering the performance, it is better to use this for sending data from browser JS to backend. CBOR can be used for sending data from backend to browser. Messagepack may be more performant, but CBOR is a standard. <br>
 
 
 - Components
