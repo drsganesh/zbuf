@@ -45,20 +45,20 @@ Dual element will not be having a data element length info
 
 - Third and fourth bits
     - 00: Boolean
-    - 01: Nil || Null || Undefined : 0b00010000
+    - 01: Nil || Null || Undefined : 0b00010000 (16)
     - 10: Array | Object
     - 11: Any : only for array start
 
 
 - 5-8 bit : 
-    - 0000: (0) : Array start     :   0b00100000 :32
+    - 0000: (0) : Array start     :   0b00100000 (32)
     - 0001: (1) : Object start    :   0b00100001
-    - 0010: (2) : Array end       :   0b00100010
+    - 0010: (2) : Array end       :   0b00100010 (34)
     - 0011: (3) : Object end      :   0b00100011
     - 0100: (4) : Table start     :   0b00100100 
     - 0101: (5) : Row start       :   0b00100101
     - 0110: (6) : Table end       :   0b00100110
-    - 0111: (7) : Row end         :   0b00100111
+    - 0111: (7) : Row end         :   0b00100111 
 
 - Object: Dual array of key value pairs : will be ordered: [][]
 - Table: Multiple sequential arrays, first array will be column name: [[],[]]
@@ -143,6 +143,62 @@ Can avoid meta bytes of elements in some cases, but keeping it for simplicity <b
 The fields (properties of object) can be avoided while sending.<br> 
 This can be added in the receiving side. <br>
 
+
+<hr>
+
+## Examples
+
+
+```javascript
+// JS : Encode Object
+    const oType = {
+        "a": ["string","string"],
+        "b": [undefined,"int16"],
+    }
+
+    const oData = {
+        "a": "abc",
+        "b": 123,
+        "c": true
+    }
+
+
+    let enc = zbuf.encodeObject(oData, oType)
+    if (enc instanceof Error) {        
+        return enc
+    }
+```
+
+```javascript
+// JS : Encode Array
+ let arType = []
+    let arData = ["abc"]
+    arData[1] = ["pqr", "stu"]
+    arData[2] = `lorum ipsum . `
+
+    // arData[4] = null
+    arData[3] = true
+    arData[6] = -3.14
+    arType[6] = "float32"
+    arData[5] = 123
+    arType[5] = "int16"
+
+    let dateIn4000 = new Date(4000, 0, 1);
+    const UTMS = dateIn4000.getTime()
+   
+    arData[7] = UTMS
+    arType[7] = "uint64"
+
+    arData[8] = dateIn4000
+
+
+
+
+    let enc = zbuf.encodeArray(arData, arType)
+    if (enc instanceof Error) {
+            return enc
+    }
+```
 
 
 
